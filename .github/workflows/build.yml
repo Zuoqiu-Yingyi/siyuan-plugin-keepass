@@ -10,7 +10,7 @@ on:
       - "v[0-9]+.[0-9]+.[0-9]+"
 
 env:
-  PACKAGE_PATH: ./workspace/plugins/keepass
+  PACKAGE_PATH: ./workspace/plugins/template
 
 jobs:
   build-and-deploy:
@@ -76,9 +76,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           cd $PACKAGE_PATH
-          echo "${{ secrets.KEEWEB_PLUGIN_SIGNATURE_PRIVATE_KEY }}" > ./keys/keeweb-plugin-sign.pem.key
           pnpm build
-          rm ./keys/keeweb-plugin-sign.pem.key
 
       # Deploy to publish branch
       # REF https://github.com/marketplace/actions/github-pages

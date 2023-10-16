@@ -13,8 +13,8 @@ permissions:
   pull-requests: write
 
 env:
-  PACKAGE_NAME: keepass
-  PACKAGE_VERSION: 0.2.1
+  PACKAGE_NAME: template
+  PACKAGE_VERSION: 0.0.0
 
 jobs:
   release-please:
