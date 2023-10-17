@@ -15,61 +15,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * REF: https://github.com/keeweb/keeweb/blob/develop/plugins/examples/settings/plugin.js
- */
+// @ts-ignore
+import BaseLocale from "util/formatting/string-format";
+
 import { camelCase } from "@workspace/utils/misc/string";
-import type { IContext } from ".";
 
 export interface IAppSettings {
-    locale?: string;
+    local?: string;
 }
 
-export function install(context: IContext) {
-    // this._logger.debug("plugin:siyuan:settings-install");
-
-    context.settings = [
-        {
-            name: "baseURL",
-            type: "text",
-            label: context.i18n!.siyuanBaseURL,
-            placeholder: context.baseURL,
-            value: "",
-        },
-        {
-            name: "token",
-            type: "text",
-            label: context.i18n!.siyuanToken,
-            placeholder: context.i18n!.siyuanTokenPlaceholder,
-            value: "",
-        },
-        {
-            name: "path",
-            type: "text",
-            label: context.i18n!.siyuanPath,
-            placeholder: context.defaultPath,
-            value: context.defaultPath,
-        },
-        {
-            name: "fileOpenSchema",
-            type: "select",
-            label: context.i18n!.siyuanFileOpenDefaultPath,
-            options: [
-                {
-                    value: "path",
-                    get label(): string { return `${context.i18n!.siyuanPath} [${context.path}]` },
-                },
-                {
-                    value: "root",
-                    get label(): string { return `${context.i18n!.siyuanWorkspaceRootDirectory} [/]` },
-                },
-            ],
-            value: "path",
-        },
-    ];
+export enum LocalStorageKey {
+    app_settings = 'app-settings',
+    file_info = 'file-info',
+    plugin_gallery = 'plugin-gallery',
+    plugins = 'plugins',
+    runtime_data = 'runtime-data',
+    update_info = 'update-info',
 }
+export function getLocalStorage(key: LocalStorageKey.app_settings): IAppSettings | null;
+export function getLocalStorage(key: LocalStorageKey): any | null {
+    const value = globalThis.localStorage.getItem(`siyuan-keepass-${key}`)
+        ?? globalThis.localStorage.getItem(camelCase(key));
 
-
-export function uninstall(context: IContext) {
-    // this._logger.debug("plugin:siyuan:settings-install");
+    if (value) {
+        return JSON.parse(value);
+    }
+    else {
+        return null;
+    }
 }
