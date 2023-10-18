@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export interface IPluginManifest {
+export interface ILocalStoragePluginManifest {
     version: string,
     manifestVersion: string,
     name: string,
@@ -41,7 +41,7 @@ export interface IPluginManifest {
 }
 
 export interface ILocalStoragePlugin {
-    manifest: IPluginManifest;
+    manifest: ILocalStoragePluginManifest;
     url: string; // 插件文件请求的 URL
     enabled: boolean; // 是否启用该插件
     autoUpdate: boolean; // 是否自动更新该插件

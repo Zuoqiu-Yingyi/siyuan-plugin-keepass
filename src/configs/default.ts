@@ -18,4 +18,11 @@
 import type { IConfig } from "@/types/config";
 
 export const DEFAULT_CONFIG: IConfig = {
+    keeweb: {
+        plugin: {
+            siyuan: {
+                enable: true,
+            },
+        },
+    },
 };
