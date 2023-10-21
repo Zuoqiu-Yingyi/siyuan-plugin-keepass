@@ -15,5 +15,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+export interface IKeeWebSiyuanPlugin {
+    enable: boolean; // 该插件是否已安装
+}
+
+export interface IKeeWebPlugin {
+    siyuan: IKeeWebSiyuanPlugin;
+}
+
+export interface IKeeWeb {
+    plugin: IKeeWebPlugin;
+}
+
+export interface IWindow {
+    width: number;
+    height: number;
+    center: boolean;
+    alwaysOnTop: boolean;
+}
+
 export interface IConfig {
+    keeweb: IKeeWeb;
+    window: IWindow;
 }
