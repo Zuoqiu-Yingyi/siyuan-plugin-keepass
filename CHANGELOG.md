@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/compare/v0.1.0...v0.1.1) (2023-10-21)
+
+
+### Miscellaneous
+
+* **keepass:** release v0.1.1 ([1521276](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/1521276ff4155bb59e767a3f8791d9dfdc1bf3c3))
+
 ## 0.1.0 (2023-10-21)
 
 
