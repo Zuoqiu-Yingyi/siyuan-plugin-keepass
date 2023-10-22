@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "manifestVersion": "0.1.0",
+  "name": "siyuan",
+  "description": "Establish a connection between KeeWeb and SiYuan",
+  "author": {
+    "name": "Zuoqiu Yingyi",
+    "email": "49649786+Zuoqiu-Yingyi@users.noreply.github.com",
+    "url": "https://github.com/Zuoqiu-Yingyi"
+  },
+  "resources": {
+    "js": "BMGn6yyIrE0q3Q66POU0MAncBXW9hJzbHG17ES1vCEA4mvE0qdBQjdy3IiOpUFotaifRPGgeJFfEYezfpTB6EUbuSsGdK+oajezf9kiP+wbo1LHaSjjWGG4o6wG2BUCMZzyamQs+nVuxgoYzhvrKxC81wmd1Xd2pcXXETh37mqfsL5WpbGeeu57hKAStp5yOOFrr+y2J+hawd9FCumkHwgKhlOFUH9rdNeGxr/2fRjF9TezObmcLSscbPXIEC9n6EQFi7NJo7oVNgnEfJFUR1NHrKACGimlwfqzMM80y6dQI290JtRoqer77nSZ9U9L3vLIRsckPEJmp/kvqrXVh3A==",
+    "css": "QP4c48mLQWWf2y6IiDSvG2dgg/jG0hhPiv5jI3mDVBCmSkyc2ew/7nN4GebzuxjC1n/eYkfRoIR8K+VqP73/9NSt1XNZBWzrolWqPXHYKtwC+p16+yWBhHdYGmje9yqYVF761DCigFc+pNHa5iVePIWRfy7jOwLfBTlIVSNNkU+uI5wXdRjLh8Qdnq9x9LrVrQcjzQGMVHd3HGwfxFSmqY0nu1+8RRJ280UpHTzNukUNfJqzkLM8F4fZrnSa5SB5OqYvT0dBOJJFK+TeVhTCEZyb+xKBq+86R+tXmBQ0eI3vwe02MxIbcLXeSp5v+m0uY173R8A83F5FBQiDFZMywQ=="
+  },
+  "license": "AGPL-3.0-or-later",
+  "url": "https://raw.githubusercontent.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/publish/keeweb/plugins/siyuan",
+  "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn+U+elZ7WlBe2T6syMBDrFT0WPzBSDwrZVR/wKoH9xpZGtL9m+eGA2w7Ep/AqwoHwT3WLJile5lBlEkyAR51Tc3jHNiMNWBPIKSutnI+KQsjfwsG6C4DH0v0+NEr4ckQmm2JR5vIazf5LSPhh8icoVF3FN4UAtCOoGL4tX4kAPuKTk44kX0NtlymEcgoMU2GnHXuknlaEXVxB/C2nNwZxoaZG48tBpm7IzKRGsj1Vp+lSrX6bAnvJksM7owf/Edx3Nq3yDq1FgiO0cVAcDx9hKGTXpXefQuohg2F3yHm4ZTLnGPhZcRkUSxkVbiJE5TdEVyXuMQ2rFBQv6pL7pQJ4QIDAQAB"
+}
