@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.4](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/compare/v0.1.3...v0.1.4) (2023-10-22)
+
+
+### Miscellaneous
+
+* **keepass:** release v0.1.4 ([f0b9af8](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/f0b9af871d1abaa971c5c477d929834beef2f137))
+
+
+### Features
+
+* **keepass:** 添加设置项 `删除 KeeWeb 用户配置` | Add setting item `Delete KeeWeb User Configuration`. ([b2cf34c](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/b2cf34c8652e78e1ba244c4f26b1350872156e8e))
+
+
+### Bug Fixes
+
+* **keepass:** 修复初始化时无法显示的问题 | Fix the issue that cannot be displayed when initializing. ([61fbce2](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/61fbce2ef7e2235ef9c96557d1cfc4a0ffe67874))
+
 ## [0.1.3](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/compare/v0.1.2...v0.1.3) (2023-10-21)
 
 
