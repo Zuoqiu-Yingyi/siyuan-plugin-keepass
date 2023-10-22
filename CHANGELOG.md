@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.2.0](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/compare/v0.1.4...v0.2.0) (2023-10-22)
+
+
+### Miscellaneous
+
+* **keepass:** release v0.2.0 ([f2201fa](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/f2201fa3b9d69e2f4b2993fb478c96244938c948))
+
+
+### Features
+
+* **keepass:** 添加 `localStorage` 单向同步功能 | Add `localStorage` one-way synchronization function. ([28709c0](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/28709c03a02946724ffcae9e1041d9f519ab1ff9))
+
+
+### Bug Fixes
+
+* **keepass:** 修复文件管理器返回上层目录问题 | Fix the issue of file manager returning to the upper directory. ([d92f11b](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/d92f11b4dffd989edf097ddb57a831f7db20849c))
+
 ## [0.1.4](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/compare/v0.1.3...v0.1.4) (2023-10-22)
 
 
