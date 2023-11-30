@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/compare/v0.2.0...v0.2.1) (2023-11-30)
+
+
+### Miscellaneous
+
+* **keepass:** 重新添加附属仓库 `keepass` | Re-add sub-repository `keepass`. ([759a92e](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/759a92eeb8750886403234914d62daaa66951f23))
+
 ## [0.2.0](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/compare/v0.1.4...v0.2.0) (2023-10-22)
 
 
