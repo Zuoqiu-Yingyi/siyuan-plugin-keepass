@@ -23,8 +23,9 @@
     import Item from "@workspace/components/siyuan/setting/item/Item.svelte";
     import Panel from "@workspace/components/siyuan/setting/panel/Panel.svelte";
     import Panels from "@workspace/components/siyuan/setting/panel/Panels.svelte";
-    import { type ITab } from "@workspace/components/siyuan/setting/tab";
     import Tabs from "@workspace/components/siyuan/setting/tab/Tabs.svelte";
+
+    import type { ITab } from "@workspace/components/siyuan/setting/tab";
 
     import type KeepassPlugin from "@/index";
     import type { IConfig } from "@/types/config";

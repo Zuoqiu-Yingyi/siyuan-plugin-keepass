@@ -19,9 +19,11 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { less } from "svelte-preprocess-less";
 import {
     defineConfig,
-    type BuildOptions,
+
 } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+
+import type { BuildOptions } from "vite";
 
 type ExternalOption = BuildOptions["rollupOptions"]["external"];
 

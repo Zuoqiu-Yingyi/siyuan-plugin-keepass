@@ -16,8 +16,7 @@
 import * as sdk from "@siyuan-community/siyuan-sdk";
 import {
     openDB,
-    type IDBPDatabase,
-    type OpenDBCallbacks,
+
 } from "idb";
 import siyuan from "siyuan";
 import { mount } from "svelte";
@@ -38,11 +37,13 @@ import { openWindow } from "@workspace/utils/window/open";
 
 import manifest from "~/public/plugin.json";
 
-import Settings from "./components/Settings.svelte";
-
 import icon_keepass_keeweb from "./assets/symbols/icon-keepass-keeweb.symbol?raw";
 import icon_keepass_slash from "./assets/symbols/icon-keepass-slash.symbol?raw";
 import { DEFAULT_CONFIG } from "./configs/default";
+
+import Settings from "./components/Settings.svelte";
+
+import type { IDBPDatabase, OpenDBCallbacks } from "idb";
 
 import type { ISiyuanGlobal } from "@workspace/types/siyuan";
 

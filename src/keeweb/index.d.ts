@@ -17,8 +17,9 @@ import type * as sdk from "@siyuan-community/siyuan-sdk";
 
 import type { IPluginManifest } from "@/types/keeweb";
 
-import type zh_Hans from "./i18n/zh-Hans.json";
 import type { SiyuanStorage } from "./storage";
+
+import type zh_Hans from "./i18n/zh-Hans.json";
 
 export type I18N = typeof zh_Hans;
 
