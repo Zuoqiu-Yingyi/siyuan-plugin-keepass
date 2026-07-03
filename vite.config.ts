@@ -16,7 +16,7 @@
 import { resolve } from "node:path";
 
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-import { less } from "svelte-preprocess-less";
+import { sveltePreprocess } from "svelte-preprocess";
 import {
     defineConfig,
 
@@ -31,9 +31,12 @@ export default defineConfig((env) => ({
     base: `./`,
     plugins: [
         svelte({
-            preprocess: {
-                style: less(),
-            },
+            preprocess: [
+                sveltePreprocess({
+                    typescript: true,
+                    less: true,
+                }),
+            ],
         }),
     ],
     resolve: {
