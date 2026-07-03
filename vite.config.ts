@@ -29,9 +29,6 @@ type ExternalOption = BuildOptions["rollupOptions"]["external"];
 // https://vitejs.dev/config/
 export default defineConfig((env) => ({
     base: `./`,
-    resolve: {
-        tsconfigPaths: true,
-    },
     plugins: [
         svelte({
             preprocess: {
@@ -39,6 +36,9 @@ export default defineConfig((env) => ({
             },
         }),
     ],
+    resolve: {
+        tsconfigPaths: true,
+    },
     build: {
         minify: true,
         // sourcemap: "inline",
