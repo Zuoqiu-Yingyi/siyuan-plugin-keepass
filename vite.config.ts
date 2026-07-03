@@ -21,7 +21,6 @@ import {
     defineConfig,
 
 } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
 
 import type { BuildOptions } from "vite";
 
@@ -30,9 +29,10 @@ type ExternalOption = BuildOptions["rollupOptions"]["external"];
 // https://vitejs.dev/config/
 export default defineConfig((env) => ({
     base: `./`,
+    resolve: {
+        tsconfigPaths: true,
+    },
     plugins: [
-        // REF: https://www.npmjs.com/package/vite-tsconfig-paths
-        tsconfigPaths(),
         svelte({
             preprocess: {
                 style: less(),
