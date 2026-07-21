@@ -61,7 +61,7 @@ import type {
 } from "./types/keeweb";
 import type { I18N } from "./utils/i18n";
 
-declare let globalThis: ISiyuanGlobal;
+const siyuanGlobal = globalThis as ISiyuanGlobal;
 
 export type TLocal = Record<string, any>;
 export interface IDB {
@@ -297,8 +297,8 @@ export default class KeepassPlugin extends siyuan.Plugin {
                 }
                 else {
                     menu.open({
-                        x: globalThis.siyuan?.coordinates?.pageX ?? 0,
-                        y: globalThis.siyuan?.coordinates?.pageY ?? 0,
+                        x: siyuanGlobal.siyuan?.coordinates?.pageX ?? 0,
+                        y: siyuanGlobal.siyuan?.coordinates?.pageY ?? 0,
                         isLeft: true,
                     });
                 }
@@ -888,7 +888,7 @@ export default class KeepassPlugin extends siyuan.Plugin {
     protected readonly openKeeWebBrowser = async () => {
         switch (true) {
             case isAndroid():
-                globalThis.JSAndroid?.openExternal(this.KEEWEB_INDEX_URL.href);
+                siyuanGlobal.JSAndroid?.openExternal(this.KEEWEB_INDEX_URL.href);
                 break;
 
             default:
@@ -908,8 +908,8 @@ export default class KeepassPlugin extends siyuan.Plugin {
                 width: this.config.window.width,
                 height: this.config.window.height,
                 alwaysOnTop: this.config.window.alwaysOnTop,
-                x: globalThis.siyuan.coordinates?.screenX ?? 0,
-                y: globalThis.siyuan.coordinates?.screenY ?? 0,
+                x: siyuanGlobal.siyuan.coordinates?.screenX ?? 0,
+                y: siyuanGlobal.siyuan.coordinates?.screenY ?? 0,
             },
             extra: {
                 enableMenuBar: true,
