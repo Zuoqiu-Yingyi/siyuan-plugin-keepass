@@ -23,7 +23,7 @@
         "@workspace/utils": "workspace:^"
     },
     "devDependencies": {
-        "idb": "^8.0.0",
+        "idb": "^8.0.3",
         "keeweb-plugin": "^0.1.12"
     }
 }
