@@ -14,9 +14,18 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 // @ts-expect-error 引用 keeweb 中的模块
+import { Comparators } from "util/data/comparators";
+// @ts-expect-error 引用 keeweb 中的模块
+import { Locale } from "util/locale";
+
+// @ts-expect-error 引用 keeweb 中的模块
+import { Alerts } from "comp/ui/alerts";
+// @ts-expect-error 引用 keeweb 中的模块
 import { Storage } from "storage/index";
 // @ts-expect-error 引用 keeweb 中的模块
 import { StorageBase } from "storage/storage-base";
+// @ts-expect-error 引用 keeweb 中的模块
+import { StorageFileListView } from "views/storage-file-list-view";
 
 import {
     join,
@@ -50,6 +59,149 @@ export interface IStatError {
     msg?: string;
 };
 
+export interface IChooserResult {
+    name: string; // 文件名
+    data: BlobPart; // 文件内容
+}
+
+export type TChooserCallback = (
+    err?: TError,
+    res?: IChooserResult,
+) => void;
+
+interface IChooserConfig {
+    dir?: string; // 当前目录
+    prevDir?: string; // 上级目录
+}
+
+class SiyuanFileChooser {
+    protected alert?: any;
+    protected result?: IEntry;
+    protected pathStack: string[] = [];
+    protected cb?: TChooserCallback;
+
+    constructor(
+        protected storage: SiyuanStorage,
+        callback: TChooserCallback,
+    ) {
+        this.cb = callback;
+    }
+
+    public choose(): void {
+        this.pathStack.length = 0;
+        this.list();
+    }
+
+    protected callback(err?: TError, res?: IChooserResult): void {
+        if (this.cb) {
+            this.cb(err, res);
+        }
+        this.cb = undefined;
+    }
+
+    protected list(config?: IChooserConfig): void {
+        this.closeAlert();
+        this.storage.list(config?.dir, (err, files) => {
+            if (err || !files) {
+                return this.callback(err || "list error");
+            }
+
+            files = this.prepareFiles(files, config);
+            if (!files.length) {
+                return this.callback("empty");
+            }
+
+            const listView = new StorageFileListView({
+                files,
+                showAllFiles: true,
+            });
+            listView.on("selected", (file: IEntry) => {
+                if (file.dir) {
+                    if (file.name === "..") {
+                        this.pathStack.pop();
+                    }
+                    else {
+                        this.pathStack.push(file.path);
+                    }
+                    this.list({
+                        dir: file.path,
+                        prevDir: this.pathStack[this.pathStack.length - 2] || "",
+                    });
+                }
+                else {
+                    this.closeAlert();
+                    this.success(file);
+                }
+            });
+            this.alert = Alerts.alert({
+                header: Locale.openSelectFile,
+                body: Locale.openSelectFileBody,
+                icon: this.storage.icon || "file-alt",
+                buttons: [{
+                    result: "",
+                    title: Locale.alertCancel,
+                }],
+                esc: "",
+                click: "",
+                view: listView,
+                cancel: () => {
+                    this.alert = undefined;
+                    if (!this.result) {
+                        this.callback("closed");
+                    }
+                },
+            });
+        });
+    }
+
+    protected prepareFiles(files: IEntry[], config?: IChooserConfig): IEntry[] {
+        const fileNameComparator = Comparators.stringComparator("path", true);
+        files = files.slice().sort((x, y) => {
+            if (x.dir !== y.dir) {
+                return Number(!!y.dir) - Number(!!x.dir);
+            }
+            return fileNameComparator(x, y);
+        });
+        if (config?.dir) {
+            files.unshift({
+                path: config.prevDir || "",
+                name: "..",
+                dir: true,
+                rev: "",
+            });
+        }
+        return files;
+    }
+
+    protected closeAlert(): void {
+        if (this.alert) {
+            const alert = this.alert;
+            this.alert = undefined;
+            alert.closeWithoutResult();
+        }
+    }
+
+    protected success(file: IEntry): void {
+        if (!file.path || file.dir) {
+            return this.callback("bad result");
+        }
+        this.result = file;
+        this.readFile(file.path);
+    }
+
+    protected readFile(path: string): void {
+        this.storage.load(path, {}, (err, data) => {
+            if (err || !data) {
+                return this.callback(err || "read error");
+            }
+            this.callback(null, {
+                name: this.result!.name,
+                data,
+            });
+        });
+    }
+}
+
 export class SiyuanStorage extends StorageBase {
     public readonly name: string;
     public readonly icon: string;
@@ -57,7 +209,8 @@ export class SiyuanStorage extends StorageBase {
     public readonly uipos = -10;
 
     public declare appSettings: any;
-    public declare enabled: boolean;
+    public enabled: boolean = true;
+    public backup: boolean = true;
 
     protected connected: boolean = false; // 是否可访问思源服务
     protected authorized: boolean = false; // 是否通过思源服务的认证
@@ -69,7 +222,6 @@ export class SiyuanStorage extends StorageBase {
         this.name = this._context.manifest.name;
         this.icon = this.name;
         this.prefix = `plugin:${this.name}`;
-        this.enabled = true;
     }
 
     public get _logger(): Console {
@@ -113,6 +265,14 @@ export class SiyuanStorage extends StorageBase {
     public getPathForName(fileName: string): string {
         // this._logger.debug("storage-getPathForName", arguments);
         return join(this._context.path, `${fileName}.kdbx`);
+    }
+
+    /**
+     * 创建思源文件选择器
+     * @param callback - 回调函数
+     */
+    public SiyuanChooser(callback: TChooserCallback): SiyuanFileChooser {
+        return new SiyuanFileChooser(this, callback);
     }
 
     /**
