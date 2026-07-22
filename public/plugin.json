@@ -2,8 +2,8 @@
     "name": "keepass",
     "author": "Zuoqiu Yingyi",
     "url": "https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass",
-    "version": "0.2.1",
-    "minAppVersion": "2.10.3",
+    "version": "0.3.0",
+    "minAppVersion": "3.7.0",
     "backends": [
         "all"
     ],
@@ -16,9 +16,9 @@
         "zh_CHT": "KeePass 密碼管理器"
     },
     "description": {
-        "default": "A password manager based on <a href='https://keeweb.info/'>KeeWeb</a>, compatibling with <a href='https://keepass.info/'>KeePass</a> 3.x and 4.x databases <code class='fn__code'>*.kdbx</code>",
-        "zh_CN": "基于 <a href='https://keeweb.info/'>KeeWeb</a> 的密码管理器，兼容 <a href='https://keepass.info/'>KeePass</a> 3.x 与 4.x 数据库 <code class='fn__code'>*.kdbx</code>",
-        "zh_CHT": "基於 <a href='https://keeweb.info/'>KeeWeb</a> 的密碼管理器，兼容 <a href='https://keepass.info/'>KeePass</a> 3.x 與 4.x 數據庫 <code class='fn__code'>*.kdbx</code>"
+        "default": "A password manager based on KeeWeb, compatibling with KeePass 3.x and 4.x databases *.kdbx",
+        "zh_CN": "基于 KeeWeb 的密码管理器，兼容 KeePass 3.x 与 4.x 数据库 *.kdbx",
+        "zh_CHT": "基於 KeeWeb 的密碼管理器，兼容 KeePass 3.x 與 4.x 數據庫 *.kdbx"
     },
     "readme": {
         "default": "README.md",
@@ -28,9 +28,9 @@
     "funding": {
         "openCollective": "",
         "patreon": "",
-        "github": "",
+        "github": "https://github.com/Zuoqiu-Yingyi",
         "custom": [
-            "https://afdian.net/a/zuoqiu",
+            "https://afdian.com/a/zuoqiu",
             "https://ko-fi.com/zuoqiu"
         ]
     }
