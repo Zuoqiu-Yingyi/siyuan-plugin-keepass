@@ -24,7 +24,7 @@ import {
 
 import type { BuildOptions } from "vite";
 
-type ExternalOption = BuildOptions["rollupOptions"]["external"];
+type ExternalOption = Required<BuildOptions>["rolldownOptions"]["external"];
 
 // https://vitejs.dev/config/
 export default defineConfig((env) => ({

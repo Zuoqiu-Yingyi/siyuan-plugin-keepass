@@ -19,7 +19,7 @@ import {
 
 } from "idb";
 import siyuan from "siyuan";
-import { mount } from "svelte";
+import { mount, unmount } from "svelte";
 
 import KeeWebTab from "@workspace/components/siyuan/tab/IframeTab.svelte";
 import {
@@ -69,7 +69,7 @@ export interface IDB {
     PluginFiles: IDBPDatabase<IDBSchemaFiles>;
 }
 export interface IKeeWebTab extends siyuan.Custom {
-    component?: InstanceType<typeof KeeWebTab>;
+    component?: ReturnType<typeof mount>;
 }
 
 export default class KeepassPlugin extends siyuan.Plugin {
@@ -175,7 +175,7 @@ export default class KeepassPlugin extends siyuan.Plugin {
                 // plugin.logger.debug("tab-init");
                 // plugin.logger.debug(this);
 
-                this.component = new KeeWebTab({
+                this.component = mount(KeeWebTab, {
                     target: this.element,
                     props: {
                         ...this.data,
@@ -184,8 +184,9 @@ export default class KeepassPlugin extends siyuan.Plugin {
             },
             destroy(this: IKeeWebTab) {
                 // plugin.logger.debug("tab-destroy");
-
-                this.component?.$destroy();
+                if (this.component) {
+                    unmount(this.component);
+                }
             },
         });
     }
@@ -765,6 +766,9 @@ export default class KeepassPlugin extends siyuan.Plugin {
                 enabled: true,
                 autoUpdate: true,
             });
+        }
+        else { // 存在插件配置 (插件已安装), 更新配置清单避免使用旧签名
+            plugin.manifest = this.manifest;
         }
         this.config.keeweb.plugin.siyuan.enable = true;
         this.setLocalStorageItem(KeepassPlugin.LOCAL_STORAGE_KEY_PLUGINS, plugins);
