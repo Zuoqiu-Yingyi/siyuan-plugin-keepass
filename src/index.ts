@@ -403,14 +403,11 @@ export default class KeepassPlugin extends siyuan.Plugin {
 
     /* 更新 keeweb 插件状态 */
     public async updateKeeWebPluginStatus(): Promise<void> {
-        switch (true) {
-            case !this.isKeeWebSiyuanPluginInstalled && this.config.keeweb.plugin.siyuan.enable: // 需要安装插件
-                await this.installKeeWebPlugin();
-                break;
-
-            case this.isKeeWebSiyuanPluginInstalled && !this.config.keeweb.plugin.siyuan.enable: // 需要卸载插件
-                await this.uninstallKeeWebPlugin();
-                break;
+        if (this.config.keeweb.plugin.siyuan.enable) {
+            await this.installKeeWebPlugin();
+        }
+        else {
+            await this.uninstallKeeWebPlugin();
         }
     }
 
@@ -770,7 +767,7 @@ export default class KeepassPlugin extends siyuan.Plugin {
         else { // 存在插件配置 (插件已安装), 更新配置清单避免使用旧签名
             plugin.manifest = this.manifest;
         }
-        this.config.keeweb.plugin.siyuan.enable = true;
+        // this.config.keeweb.plugin.siyuan.enable = true;
         this.setLocalStorageItem(KeepassPlugin.LOCAL_STORAGE_KEY_PLUGINS, plugins);
 
         /* 添加插件文件到 idb */
@@ -783,7 +780,7 @@ export default class KeepassPlugin extends siyuan.Plugin {
         await Promise.allSettled([
             this.saveIDB(KeepassPlugin.IDB_SCHEMA.PluginFiles.name), // 保存 IDB "PluginFiles"
             this.saveLocal(), // 保存 local
-            this.updateConfig(), // 保存 config
+            // this.updateConfig(), // 保存 config
         ]);
     }
 
@@ -798,10 +795,10 @@ export default class KeepassPlugin extends siyuan.Plugin {
             const index = plugins.plugins.indexOf(plugin);
             plugins.plugins.splice(index, 1);
         }
-        this.config.keeweb.plugin.siyuan.enable = false;
+        // this.config.keeweb.plugin.siyuan.enable = false;
         this.setLocalStorageItem(KeepassPlugin.LOCAL_STORAGE_KEY_PLUGINS, plugins);
 
-        /* 添加插件文件到 idb */
+        /* 从 idb 中删除插件文件 */
         await Promise.allSettled([
             this.deleteKeeWebPluginFile("js"),
             this.deleteKeeWebPluginFile("css"),
@@ -811,7 +808,7 @@ export default class KeepassPlugin extends siyuan.Plugin {
         await Promise.allSettled([
             this.saveIDB(KeepassPlugin.IDB_SCHEMA.PluginFiles.name), // 保存 IDB "PluginFiles"
             this.saveLocal(), // 保存 local
-            this.updateConfig(), // 保存 config
+            // this.updateConfig(), // 保存 config
         ]);
     }
 
