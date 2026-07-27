@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.3.1](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/compare/v0.3.0...v0.3.1) (2026-07-27)
+
+
+### Miscellaneous
+
+* release v0.3.1 ([f7bde48](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/f7bde4878c6c9be5a2923f34a04facbc1af1c26d))
+* **release:** bump version to 0.3.1 in package.json, manifest.json, and plugin.json ([668e926](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/668e9261e17b5c9a9970de4f7d0f8e6f9efec340))
+* **release:** remove specific release version from config ([2c0b8fe](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/2c0b8feee6e88b0de003292fed30f98fdb8d2e41))
+
+
+### Features
+
+* **build:** add steps to create and remove KeeWeb plugin signature key ([a795f38](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/a795f380c5b98259ca3206151494c99ac46168da))
+
 ## 0.3.0 (2026-07-22)
 
 
