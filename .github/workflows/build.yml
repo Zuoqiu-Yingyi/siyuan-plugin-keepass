@@ -57,12 +57,26 @@ jobs:
           cd ./workspace
           pnpm install
 
+      # Create signature key
+      - name: Create KeeWeb plugin signature key
+        run: |
+          cd $GITHUB_WORKSPACE
+          cd $PACKAGE_PATH
+          echo "${{ secrets.KEEWEB_PLUGIN_SIGNATURE_PRIVATE_KEY }}" > ./keys/keeweb-plugin-sign.pem.key
+
       # Build package
       - name: Build package
         run: |
           cd $GITHUB_WORKSPACE
           cd $PACKAGE_PATH
           pnpm build
+
+      # Remove signature key
+      - name: Remove KeeWeb plugin signature key
+        run: |
+          cd $GITHUB_WORKSPACE
+          cd $PACKAGE_PATH
+          rm ./keys/keeweb-plugin-sign.pem.key
 
       # Deploy to publish branch
       # REF https://github.com/marketplace/actions/github-pages
