@@ -191,7 +191,7 @@ export default class KeepassPlugin extends siyuan.Plugin {
         });
     }
 
-    public override onload(): void {
+    public override async onload(): Promise<void> {
         // this.logger.debug(this);
 
         /* 注册图标 */
@@ -249,25 +249,27 @@ export default class KeepassPlugin extends siyuan.Plugin {
         //     globalCallback: () => this.openKeeWebWindow(true),
         // });
 
-        this.loadData(KeepassPlugin.GLOBAL_CONFIG_NAME)
-            .then((config) => {
-                if (config) {
-                    this.config = mergeIgnoreArray(DEFAULT_CONFIG, config) as IConfig;
-                }
-                else {
-                    this.config = mergeIgnoreArray(DEFAULT_CONFIG);
-                }
-            })
-            .catch((error) => this.logger.error(error))
-            .finally(async () => {
-                await this.initIDB();
-                await this.initFiles();
+        try {
+            const config = await this.loadData(KeepassPlugin.GLOBAL_CONFIG_NAME);
+            if (config) {
+                this.config = mergeIgnoreArray(DEFAULT_CONFIG, config) as IConfig;
+            }
+            else {
+                this.config = mergeIgnoreArray(DEFAULT_CONFIG);
+            }
+        }
+        catch (error) {
+            this.logger.error(error);
+        }
+        finally {
+            await this.initIDB();
+            await this.initFiles();
 
-                await this.loadIDB();
-                await this.loadLocalStorage();
-                await this.updateKeeWebPluginStatus();
-                globalThis.addEventListener("storage", this.storageEventListener);
-            });
+            await this.loadIDB();
+            await this.loadLocalStorage();
+            await this.updateKeeWebPluginStatus();
+            globalThis.addEventListener("storage", this.storageEventListener);
+        }
     }
 
     public override onLayoutReady(): void {
@@ -311,6 +313,15 @@ export default class KeepassPlugin extends siyuan.Plugin {
         globalThis.removeEventListener("storage", this.storageEventListener);
         this.saveLocalStorage();
         this.saveIDB();
+    }
+
+    /**
+     * 未覆盖该方法时, 思源会在插件自身存储目录发生变化后重新加载整个插件;
+     * 而 `onload` 中的 `installKeeWebPlugin`/`saveIDB`/`saveLocal` 每次都会无条件写入该目录,
+     * 从而导致 "写入 → 触发重载 → onload 再次写入" 的无限重载循环
+     */
+    public override onDataChanged(): void {
+        // 数据变更均由本插件自身写入触发, 无需重新加载插件
     }
 
     public override openSetting(): void {

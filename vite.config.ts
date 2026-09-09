@@ -46,7 +46,7 @@ export default defineConfig((env) => ({
         minify: true,
         // sourcemap: "inline",
         lib: {
-            entry: resolve(__dirname, "src/index.ts"),
+            entry: resolve(import.meta.dirname, "src/index.ts"),
             fileName: "index",
             formats: ["cjs"],
         },
@@ -125,7 +125,7 @@ function build(mode: string): BuildOptions {
             return {
                 emptyOutDir: true,
                 lib: {
-                    entry: resolve(__dirname, "src/index.ts"),
+                    entry: resolve(import.meta.dirname, "src/index.ts"),
                     fileName: "index",
                     formats: ["cjs"],
                 },
@@ -135,7 +135,7 @@ function build(mode: string): BuildOptions {
             return {
                 emptyOutDir: false,
                 lib: {
-                    entry: resolve(__dirname, "src/keeweb/plugin.ts"),
+                    entry: resolve(import.meta.dirname, "src/keeweb/plugin.ts"),
                     fileName: "plugin",
                     formats: ["cjs"],
                 },
