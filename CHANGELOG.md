@@ -1,5 +1,36 @@
 # Changelog
 
+## [0.3.2](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/compare/v0.3.1...v0.3.2) (2026-09-09)
+
+
+### Miscellaneous
+
+* release v0.3.2 ([8efffa0](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/8efffa07b71f94c00cc130108cb333f1de361da2))
+* **release:** bump version to 0.3.2 in package.json, manifest.json, and plugin.json ([23b1b5d](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/23b1b5d5d04ac7ac27ae3392a55f8db734ec8650))
+* **vite:** update entry resolution to use import.meta.dirname ([77d163c](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/77d163c1b8d71faee5d8bc1307f1acb1fbd0d9e3))
+
+
+### Continuous Integration
+
+* **build:** streamline Node.js setup by replacing setup-node with pnpm setup in build workflow ([8734cb6](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/8734cb6b237724804aa6ec02905a31c6ca05c386))
+
+
+### Bug Fixes
+
+* override onDataChanged to prevent infinite plugin reload loop ([4855576](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/48555763fbf6e8ab41d70482912541acfe40122c))
+* **Settings:** add svelte-ignore directive for local state reference ([5ff8a0d](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/5ff8a0d54b4ee6e1179df82679c8d17f14b5a709))
+
+
+### Code Refactoring
+
+* **i18n:** refactor multilingual support with updated language files and README links ([d3271cb](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/d3271cb428545a9156caed2a2fa593fd3c929583))
+* **onload:** convert onload to async and streamline configuration loading ([ff7dc9f](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/ff7dc9f3779e43ced123c6af38c15b57568bd402))
+
+
+### Styles
+
+* **i18n:** correct import order for zh_Hant language type ([5069758](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/commit/5069758b276122fd1f146c92871c1064385dcafd))
+
 ## [0.3.1](https://github.com/Zuoqiu-Yingyi/siyuan-plugin-keepass/compare/v0.3.0...v0.3.1) (2026-07-27)
 
 
