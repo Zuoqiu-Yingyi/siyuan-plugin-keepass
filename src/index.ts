@@ -315,6 +315,15 @@ export default class KeepassPlugin extends siyuan.Plugin {
         this.saveIDB();
     }
 
+    /**
+     * 未覆盖该方法时, 思源会在插件自身存储目录发生变化后重新加载整个插件;
+     * 而 `onload` 中的 `installKeeWebPlugin`/`saveIDB`/`saveLocal` 每次都会无条件写入该目录,
+     * 从而导致 "写入 → 触发重载 → onload 再次写入" 的无限重载循环
+     */
+    public override onDataChanged(): void {
+        // 数据变更均由本插件自身写入触发, 无需重新加载插件
+    }
+
     public override openSetting(): void {
         const dialog = new siyuan.Dialog({
             title: `${this.displayName} <code class="fn__code">${this.name}</code>`,
