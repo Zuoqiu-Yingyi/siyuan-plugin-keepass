@@ -1,0 +1,2 @@
+- app repo: [Zuoqiu-Yingyi/keeweb · GitHub](https://github.com/Zuoqiu-Yingyi/keeweb)
+- plugin repo: [keeweb-plugins/docs · keeweb/keeweb-plugins · GitHub](https://github.com/keeweb/keeweb-plugins/tree/master/docs)
