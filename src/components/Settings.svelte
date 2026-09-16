@@ -116,146 +116,155 @@
 <Panels
     focus={panels_focus_key}
     {panels}
-    let:focus={focusPanel}
 >
-    <!-- 常规设置面板 -->
-    <Panel display={panels[0]?.key === focusPanel}>
-        <!-- 重置设置 -->
-        <Item
-            text={i18n.settings.generalSettings.reset.description}
-            title={i18n.settings.generalSettings.reset.title}
-        >
-            <Input
-                slot="input"
-                settingKey="reset"
-                settingValue={i18n.settings.generalSettings.reset.text}
-                type={ItemType.button}
-                on:clicked={resetOptions}
-            />
-        </Item>
-
-        <!-- 删除 KeeWeb 用户配置 -->
-        <Item
-            text={i18n.settings.generalSettings.deleteKeeWebConfig.description}
-            title={i18n.settings.generalSettings.deleteKeeWebConfig.title}
-        >
-            <Input
-                slot="input"
-                settingKey="deleteKeeWebConfig"
-                settingValue={i18n.settings.generalSettings.deleteKeeWebConfig.text}
-                type={ItemType.button}
-                on:clicked={deleteKeeWebConfig}
-            />
-        </Item>
-    </Panel>
-
-    <!-- KeeWeb 设置面板 -->
-    <Panel display={panels[1]?.key === focusPanel}>
-        <Tabs
-            focus={keeweb_settings_tabs_focus_key}
-            tabs={tabs.keeweb}
-            let:focus={focusTab}
-        >
-            <!-- 标签页 1 - 插件设置 -->
-            <div
-                class:fn__none={tabs.keeweb[0]?.key !== focusTab}
-                data-type={tabs.keeweb[0]?.name}
+    {#snippet children(focusPanel)}
+        <!-- 常规设置面板 -->
+        <Panel display={panels[0]?.key === focusPanel}>
+            <!-- 重置设置 -->
+            <Item
+                text={i18n.settings.generalSettings.reset.description}
+                title={i18n.settings.generalSettings.reset.title}
             >
-                <!-- 思源插件 -->
-                <Item
-                    text={i18n.settings.keewebSettings.pluginTab.siyuan.description}
-                    title={i18n.settings.keewebSettings.pluginTab.siyuan.title}
-                >
+                {#snippet input()}
                     <Input
-                        slot="input"
-                        settingKey="siyuan"
-                        settingValue={config.keeweb.plugin.siyuan.enable}
-                        type={ItemType.checkbox}
-                        on:changed={async (e) => {
-                            config.keeweb.plugin.siyuan.enable = e.detail.value;
-                            await updated();
-                        }}
+                        onClicked={resetOptions}
+                        settingKey="reset"
+                        settingValue={i18n.settings.generalSettings.reset.text}
+                        type={ItemType.button}
                     />
-                </Item>
-            </div>
+                {/snippet}
+            </Item>
 
-            <!-- 标签页 2 - 窗口设置 -->
-            <div
-                class:fn__none={tabs.keeweb[1]?.key !== focusTab}
-                data-type={tabs.keeweb[1]?.name}
+            <!-- 删除 KeeWeb 用户配置 -->
+            <Item
+                text={i18n.settings.generalSettings.deleteKeeWebConfig.description}
+                title={i18n.settings.generalSettings.deleteKeeWebConfig.title}
             >
-                <!-- 窗口宽度 -->
-                <Item
-                    text={i18n.settings.keewebSettings.windowTab.width.description}
-                    title={i18n.settings.keewebSettings.windowTab.width.title}
-                >
+                {#snippet input()}
                     <Input
-                        slot="input"
-                        limits={{ min: 320, max: 15360, step: 40 }}
-                        settingKey="width"
-                        settingValue={config.window.width}
-                        type={ItemType.number}
-                        on:changed={async (e) => {
-                            config.window.width = e.detail.value;
-                            await updated();
-                        }}
+                        onClicked={deleteKeeWebConfig}
+                        settingKey="deleteKeeWebConfig"
+                        settingValue={i18n.settings.generalSettings.deleteKeeWebConfig.text}
+                        type={ItemType.button}
                     />
-                </Item>
+                {/snippet}
+            </Item>
+        </Panel>
 
-                <!-- 窗口高度 -->
-                <Item
-                    text={i18n.settings.keewebSettings.windowTab.height.description}
-                    title={i18n.settings.keewebSettings.windowTab.height.title}
-                >
-                    <Input
-                        slot="input"
-                        limits={{ min: 240, max: 8640, step: 40 }}
-                        settingKey="height"
-                        settingValue={config.window.height}
-                        type={ItemType.number}
-                        on:changed={async (e) => {
-                            config.window.height = e.detail.value;
-                            await updated();
-                        }}
-                    />
-                </Item>
+        <!-- KeeWeb 设置面板 -->
+        <Panel display={panels[1]?.key === focusPanel}>
+            <Tabs
+                focus={keeweb_settings_tabs_focus_key}
+                tabs={tabs.keeweb}
+            >
+                {#snippet children(focusTab)}
+                    <!-- 标签页 1 - 插件设置 -->
+                    <div
+                        class:fn__none={tabs.keeweb[0]?.key !== focusTab}
+                        data-type={tabs.keeweb[0]?.name}
+                    >
+                        <!-- 思源插件 -->
+                        <Item
+                            text={i18n.settings.keewebSettings.pluginTab.siyuan.description}
+                            title={i18n.settings.keewebSettings.pluginTab.siyuan.title}
+                        >
+                            {#snippet input()}
+                                <Input
+                                    onChanged={async (e) => {
+                                        config.keeweb.plugin.siyuan.enable = e.value;
+                                        await updated();
+                                    }}
+                                    settingKey="siyuan"
+                                    settingValue={config.keeweb.plugin.siyuan.enable}
+                                    type={ItemType.checkbox}
+                                />
+                            {/snippet}
+                        </Item>
+                    </div>
 
-                <!-- 窗口居中 -->
-                <Item
-                    text={i18n.settings.keewebSettings.windowTab.center.description}
-                    title={i18n.settings.keewebSettings.windowTab.center.title}
-                >
-                    <Input
-                        slot="input"
-                        settingKey="center"
-                        settingValue={config.window.center}
-                        type={ItemType.checkbox}
-                        on:changed={async (e) => {
-                            config.window.center = e.detail.value;
-                            await updated();
-                        }}
-                    />
-                </Item>
+                    <!-- 标签页 2 - 窗口设置 -->
+                    <div
+                        class:fn__none={tabs.keeweb[1]?.key !== focusTab}
+                        data-type={tabs.keeweb[1]?.name}
+                    >
+                        <!-- 窗口宽度 -->
+                        <Item
+                            text={i18n.settings.keewebSettings.windowTab.width.description}
+                            title={i18n.settings.keewebSettings.windowTab.width.title}
+                        >
+                            {#snippet input()}
+                                <Input
+                                    limits={{ min: 320, max: 15360, step: 40 }}
+                                    onChanged={async (e) => {
+                                        config.window.width = e.value;
+                                        await updated();
+                                    }}
+                                    settingKey="width"
+                                    settingValue={config.window.width}
+                                    type={ItemType.number}
+                                />
+                            {/snippet}
+                        </Item>
 
-                <!-- 窗口置顶 -->
-                <Item
-                    text={i18n.settings.keewebSettings.windowTab.top.description}
-                    title={i18n.settings.keewebSettings.windowTab.top.title}
-                >
-                    <Input
-                        slot="input"
-                        settingKey="alwaysOnTop"
-                        settingValue={config.window.alwaysOnTop}
-                        type={ItemType.checkbox}
-                        on:changed={async (e) => {
-                            config.window.alwaysOnTop = e.detail.value;
-                            await updated();
-                        }}
-                    />
-                </Item>
-            </div>
-        </Tabs>
-    </Panel>
+                        <!-- 窗口高度 -->
+                        <Item
+                            text={i18n.settings.keewebSettings.windowTab.height.description}
+                            title={i18n.settings.keewebSettings.windowTab.height.title}
+                        >
+                            {#snippet input()}
+                                <Input
+                                    limits={{ min: 240, max: 8640, step: 40 }}
+                                    onChanged={async (e) => {
+                                        config.window.height = e.value;
+                                        await updated();
+                                    }}
+                                    settingKey="height"
+                                    settingValue={config.window.height}
+                                    type={ItemType.number}
+                                />
+                            {/snippet}
+                        </Item>
+
+                        <!-- 窗口居中 -->
+                        <Item
+                            text={i18n.settings.keewebSettings.windowTab.center.description}
+                            title={i18n.settings.keewebSettings.windowTab.center.title}
+                        >
+                            {#snippet input()}
+                                <Input
+                                    onChanged={async (e) => {
+                                        config.window.center = e.value;
+                                        await updated();
+                                    }}
+                                    settingKey="center"
+                                    settingValue={config.window.center}
+                                    type={ItemType.checkbox}
+                                />
+                            {/snippet}
+                        </Item>
+
+                        <!-- 窗口置顶 -->
+                        <Item
+                            text={i18n.settings.keewebSettings.windowTab.top.description}
+                            title={i18n.settings.keewebSettings.windowTab.top.title}
+                        >
+                            {#snippet input()}
+                                <Input
+                                    onChanged={async (e) => {
+                                        config.window.alwaysOnTop = e.value;
+                                        await updated();
+                                    }}
+                                    settingKey="alwaysOnTop"
+                                    settingValue={config.window.alwaysOnTop}
+                                    type={ItemType.checkbox}
+                                />
+                            {/snippet}
+                        </Item>
+                    </div>
+                {/snippet}
+            </Tabs>
+        </Panel>
+    {/snippet}
 </Panels>
 
 <style lang="less">
